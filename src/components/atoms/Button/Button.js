@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components';
 
 const Button = styled.button`
   padding: 0;
-  background-color: #e6e6e6;
+  background-color: ${({ color }) =>
+    color || 'hsl(49, 100%, 58%)'};
   width: ${({ width }) => width || '220px'};
   height: 47px;
   border: none;
@@ -11,11 +12,13 @@ const Button = styled.button`
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
 
   ${({ secondary }) =>
     secondary &&
     css`
-      background-color: #ffd82b;
+      background-color: hsl(0, 0%, 90.2%);
       width: 105px;
       height: 30px;
       font-size: 10px;
