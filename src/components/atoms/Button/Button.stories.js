@@ -1,9 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import {
-  withKnobs,
-  select,
-} from '@storybook/addon-knobs';
+import { withKnobs, select } from '@storybook/addon-knobs';
 import Button from './Button';
 
 storiesOf('Button', module)
@@ -19,19 +16,8 @@ storiesOf('Button', module)
     const defaultValue = options.Primary;
     const groupId = 'GROUP-ID1';
 
-    const value = select(
-      label,
-      options,
-      defaultValue,
-      groupId,
-    );
+    const value = select(label, options, defaultValue, groupId);
 
-    return (
-      <Button color={value}>
-        Primary button
-      </Button>
-    );
+    return <Button color={value}>Primary button</Button>;
   })
-  .add('Secondary', () => (
-    <Button secondary>Secondary button</Button>
-  ));
+  .add('Secondary', () => <Button secondary>Secondary button</Button>);

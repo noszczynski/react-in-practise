@@ -1,11 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'theme/GlobalStyle';
 import Button from 'components/atoms/Button/Button';
-
-const theme = {
-  primary: 'black',
-};
+import { theme } from 'theme/mainTheme';
 
 const Root = () => (
   <div>
