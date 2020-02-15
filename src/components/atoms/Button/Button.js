@@ -14,10 +14,10 @@ const Button = styled.button`
   cursor: pointer;
   outline: none;
 
-  ${({ secondary }) =>
+  ${({ secondary, theme }) =>
     secondary &&
     css`
-      background-color: hsl(0, 0%, 90.2%);
+      background-color: ${theme.grey200};
       width: 105px;
       height: 30px;
       font-size: 10px;
