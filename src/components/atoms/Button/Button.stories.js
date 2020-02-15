@@ -8,9 +8,9 @@ storiesOf('Button', module)
   .add('Primary', () => {
     const label = 'Colors';
     const options = {
-      Primary: 'hsl(49, 100%, 58%)',
-      Secondary: 'hsl(196, 83%, 75%)',
-      Tertiary: 'hsl(106, 47%, 64%)',
+      Article: 'hsl(49, 100%, 58%)',
+      Twitter: 'hsl(196, 83%, 75%)',
+      Note: 'hsl(106, 47%, 64%)',
     };
 
     const defaultValue = options.Primary;
