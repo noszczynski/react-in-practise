@@ -16,7 +16,9 @@ const Wrapper = styled.div`
 `;
 
 const InnerWrapper = styled.div`
-  padding: 17px 30px;
+  padding: 17px 70px 17px 30px;
+  ${({ cardType }) => console.log(cardType)};
+  ${({ cardType }) => cardType === 'twitters' && 'padding-right: 120px'};
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : '#FFF')};
   position: relative;
 
@@ -46,7 +48,7 @@ const StyledHeading = styled(Heading)`
 const StyledAvatar = styled.img`
   width: 86px;
   height: 86px;
-  border: 5px solid ${({ theme }) => theme.twitter};
+  border: 5px solid ${({ theme }) => theme.twitters};
   border-radius: 50px;
   position: absolute;
   right: 25px;
@@ -61,19 +63,16 @@ const StyledLinkButton = styled.a`
   background: url(${LinkIcon}) 50%/50% no-repeat #fff;
   position: absolute;
   right: 25px;
-  top: 30px;
+  top: 25px;
 `;
 
-const Card = ({ cardType, header, date, content, link }) => (
+const Card = ({ cardType, title, createdDate, content, link }) => (
   <Wrapper>
     <InnerWrapper activeColor={cardType}>
-      <StyledHeading>{header}</StyledHeading>
-      <DateInfo>{date}</DateInfo>
-      {cardType === 'twitter' && (
-        <StyledAvatar src={link} />
-        // https://scontent.fktw2-1.fna.fbcdn.net/v/t1.0-9/p960x960/83120798_2739813729417672_3825953439892897792_o.jpg?_nc_cat=103&_nc_ohc=BEjbQwOrImMAX93jNhS&_nc_ht=scontent.fktw2-1.fna&_nc_tp=6&oh=0350b9065dd7f0fcee4005ffb9ec1281&oe=5EFF9F10
-      )}
-      {cardType === 'article' && <StyledLinkButton href={link} />}
+      <StyledHeading>{title}</StyledHeading>
+      <DateInfo>{createdDate}</DateInfo>
+      {cardType === 'twitters' && <StyledAvatar src={link} />}
+      {cardType === 'articles' && <StyledLinkButton href={link} />}
     </InnerWrapper>
     <InnerWrapper flex>
       <Paragraph>{content}</Paragraph>
@@ -84,18 +83,15 @@ const Card = ({ cardType, header, date, content, link }) => (
 
 Card.propTypes = {
   cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
-  header: PropTypes.string,
-  date: PropTypes.string,
-  content: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  createdDate: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   link: PropTypes.string,
 };
 
 Card.defaultProps = {
   cardType: 'notes',
-  header: 'Header',
-  date: '1 day',
-  content: 'Lorem ipsum dolor sit amet',
-  link: 'http://google.com/',
+  link: null,
 };
 
 export default Card;

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Input from '../components/atoms/Input/Input';
 import Heading from '../components/atoms/Heading/Heading';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
+import Card from '../components/molecules/Card/Card';
 
 const StyledPageHeader = styled.div`
   display: block;
@@ -24,11 +25,14 @@ const StyledWrapper = styled.div``;
 
 const StyledPageContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   column-gap: 86px;
   row-gap: 86px;
   padding-right: 86px;
+
+  @media (max-width: 570px) {
+    padding-right: 0;
+  }
 `;
 
 const UserPage = ({ children, pageType }) => (
@@ -40,20 +44,35 @@ const UserPage = ({ children, pageType }) => (
         <StyledPageHeading big as="h1">
           {pageType}
         </StyledPageHeading>
-        <Paragraph>3 days</Paragraph>
+        <Paragraph>
+          {children.length} {pageType}
+        </Paragraph>
       </StyledPageHeader>
-      <StyledPageContent>{children}</StyledPageContent>
+      <StyledPageContent>
+        {children.map(({ header, date, content, link }) => {
+          return (
+            <Card
+              cardType={pageType}
+              title={header}
+              createdDate={date}
+              content={content}
+              link={link}
+              key={header}
+            />
+          );
+        })}
+      </StyledPageContent>
     </StyledWrapper>
   </>
 );
 
 UserPage.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.array.isRequired,
   pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
 UserPage.defaultProps = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.array.isRequired,
   pageType: 'notes',
 };
 

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import ButtonIcon from '../../atoms/ButtonIcon/ButtonIcon';
 
 const Wrapper = styled.div`
+  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +22,11 @@ const Wrapper = styled.div`
   background: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.notes)};
   width: 153px;
   padding: 58px 0 36px;
+  transition: transform 0.2s ease;
+
+  @media (max-width: 570px) {
+    transform: translateX(-100%);
+  }
 `;
 
 const StyledLinksList = styled.ul`
@@ -52,13 +58,13 @@ const Sidebar = ({ pageType }) => {
         <StyledLogoLink to="/" />
         <StyledLinksList>
           <li>
-            <ButtonIcon as={NavLink} exact to="/" icon={penIcon} activeClass="active" />
+            <ButtonIcon as={NavLink} exact to="/" icon={penIcon} />
           </li>
           <li>
-            <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClass="active" />
+            <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} />
           </li>
           <li>
-            <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClass="active" />
+            <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} />
           </li>
         </StyledLinksList>
       </InnerWrapper>
