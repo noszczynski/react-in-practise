@@ -6,12 +6,6 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import LinkIcon from 'assets/icons/link.svg';
 
-const CARD_TYPE = {
-  note: 'note',
-  twitter: 'twitter',
-  article: 'article',
-};
-
 const Wrapper = styled.div`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   border-radius: 10px;
@@ -59,7 +53,7 @@ const StyledAvatar = styled.img`
   top: 25px;
 `;
 
-const StyledLinkButton = styled(Heading)`
+const StyledLinkButton = styled.a`
   display: block;
   height: 40px;
   border-radius: 50px;
@@ -67,38 +61,41 @@ const StyledLinkButton = styled(Heading)`
   background: url(${LinkIcon}) 50%/50% no-repeat #fff;
   position: absolute;
   right: 25px;
-  top: 15px;
+  top: 30px;
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({ cardType, header, date, content, link }) => (
   <Wrapper>
     <InnerWrapper activeColor={cardType}>
-      <StyledHeading>Hello Adam!</StyledHeading>
-      <DateInfo>3 days</DateInfo>
+      <StyledHeading>{header}</StyledHeading>
+      <DateInfo>{date}</DateInfo>
       {cardType === 'twitter' && (
-        <StyledAvatar src="https://scontent.fktw2-1.fna.fbcdn.net/v/t1.0-9/p960x960/83120798_2739813729417672_3825953439892897792_o.jpg?_nc_cat=103&_nc_ohc=BEjbQwOrImMAX93jNhS&_nc_ht=scontent.fktw2-1.fna&_nc_tp=6&oh=0350b9065dd7f0fcee4005ffb9ec1281&oe=5EFF9F10" />
+        <StyledAvatar src={link} />
+        // https://scontent.fktw2-1.fna.fbcdn.net/v/t1.0-9/p960x960/83120798_2739813729417672_3825953439892897792_o.jpg?_nc_cat=103&_nc_ohc=BEjbQwOrImMAX93jNhS&_nc_ht=scontent.fktw2-1.fna&_nc_tp=6&oh=0350b9065dd7f0fcee4005ffb9ec1281&oe=5EFF9F10
       )}
-      {cardType === 'article' && (
-        <StyledLinkButton href="https://www.facebook.com/adam.noszczynski" />
-      )}
+      {cardType === 'article' && <StyledLinkButton href={link} />}
     </InnerWrapper>
     <InnerWrapper flex>
-      <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae cupiditate dolorem eius hic
-        ipsa iure, iusto maxime minus provident quisquam totam unde? Commodi doloribus iure pariatur
-        placeat provident sunt tenetur oribus iure pariatur placeat provident sunt tenetur.
-      </Paragraph>
+      <Paragraph>{content}</Paragraph>
       <Button secondary>Remove</Button>
     </InnerWrapper>
   </Wrapper>
 );
 
 Card.propTypes = {
-  cardType: PropTypes.string,
+  cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  header: PropTypes.string,
+  date: PropTypes.string,
+  content: PropTypes.string,
+  link: PropTypes.string,
 };
 
 Card.defaultProps = {
-  cardType: CARD_TYPE.note,
+  cardType: 'notes',
+  header: 'Header',
+  date: '1 day',
+  content: 'Lorem ipsum dolor sit amet',
+  link: 'http://google.com/',
 };
 
 export default Card;

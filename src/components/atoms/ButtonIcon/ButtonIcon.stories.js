@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import bulbIcon from 'assets/icons/bulb.svg';
@@ -16,7 +15,7 @@ const YellowBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.note};
+  background-color: ${({ theme }) => theme.notes};
   width: 500px;
   height: 500px;
 `;
