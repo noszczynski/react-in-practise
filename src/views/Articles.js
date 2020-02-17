@@ -1,8 +1,9 @@
 import React from 'react';
-import UserPage from 'templates/UserPage';
+import GridTemplate from 'templates/GridTemplate';
 
 const articles = [
   {
+    id: '1',
     header: 'My best note ever!',
     date: '3 days',
     content:
@@ -11,6 +12,6 @@ const articles = [
   },
 ];
 
-const Articles = () => <UserPage pageType="articles">{articles}</UserPage>;
+const Articles = () => <GridTemplate pageType="articles">{articles}</GridTemplate>;
 
 export default Articles;

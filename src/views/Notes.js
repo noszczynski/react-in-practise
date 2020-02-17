@@ -1,8 +1,9 @@
 import React from 'react';
-import UserPage from 'templates/UserPage';
+import GridTemplate from 'templates/GridTemplate';
 
 const notes = [
   {
+    id: '1',
     header: 'My best note ever!',
     date: '3 days',
     content:
@@ -11,9 +12,7 @@ const notes = [
   },
 ];
 
-const Notes = () => {
-  return <UserPage pageType="notes">{notes}</UserPage>;
-};
+const Notes = () => <GridTemplate pageType="notes">{notes}</GridTemplate>;
 
 Notes.propTypes = {};
 

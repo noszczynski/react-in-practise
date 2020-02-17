@@ -1,78 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Sidebar from 'components/organisms/Siedbar/Siedbar';
-import styled from 'styled-components';
-import Input from '../components/atoms/Input/Input';
-import Heading from '../components/atoms/Heading/Heading';
-import Paragraph from '../components/atoms/Paragraph/Paragraph';
-import Card from '../components/molecules/Card/Card';
-
-const StyledPageHeader = styled.div`
-  display: block;
-  min-height: 100px;
-  padding-bottom: 60px;
-  h1 {
-    margin-bottom: 0;
-  }
-  p {
-    font-weight: ${({ theme }) => theme.bold};
-  }
-`;
-const StyledPageHeading = styled(Heading)`
-  text-transform: capitalize;
-`;
-const StyledWrapper = styled.div``;
-
-const StyledPageContent = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  column-gap: 86px;
-  row-gap: 86px;
-  padding-right: 86px;
-
-  @media (max-width: 570px) {
-    padding-right: 0;
-  }
-`;
+import Sidebar from 'components/organisms/Siedbar/Sidebar';
 
 const UserPage = ({ children, pageType }) => (
   <>
     <Sidebar pageType={pageType} />
-    <StyledWrapper>
-      <StyledPageHeader>
-        <Input search placeholder="Search" />
-        <StyledPageHeading big as="h1">
-          {pageType}
-        </StyledPageHeading>
-        <Paragraph>
-          {children.length} {pageType}
-        </Paragraph>
-      </StyledPageHeader>
-      <StyledPageContent>
-        {children.map(({ header, date, content, link }) => {
-          return (
-            <Card
-              cardType={pageType}
-              title={header}
-              createdDate={date}
-              content={content}
-              link={link}
-              key={header}
-            />
-          );
-        })}
-      </StyledPageContent>
-    </StyledWrapper>
+    {children}
   </>
 );
 
 UserPage.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.node.isRequired,
   pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
 UserPage.defaultProps = {
-  children: PropTypes.array.isRequired,
   pageType: 'notes',
 };
 
