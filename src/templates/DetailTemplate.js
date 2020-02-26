@@ -1,15 +1,17 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import UserPage from './UserPage';
 
-const DetailTemplate = ({ pageType, children }) => (
-  <UserPage pageType={pageType}>
-    {children}
-    <Link to="/notes">go back</Link>
-  </UserPage>
-);
+const DetailTemplate = ({ pageType, children }) => {
+  return (
+    <UserPage pageType={pageType}>
+      {children}
+      <Link to="/notes">go back</Link>
+    </UserPage>
+  );
+};
 
 DetailTemplate.propTypes = {
   children: PropTypes.node.isRequired,

@@ -4,8 +4,9 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Articles from 'views/Articles';
 import Notes from 'views/Notes';
 import Twitters from 'views/Twitters';
-import { routes } from 'routes';
-import DetailPage from './DetailPage';
+import routes from 'routes';
+// eslint-disable-next-line import/no-named-as-default,import/no-named-as-default-member
+import DetailPage from 'views/DetailPage';
 
 const Root = () => (
   <BrowserRouter>
