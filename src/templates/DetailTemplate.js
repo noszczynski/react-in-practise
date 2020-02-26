@@ -1,14 +1,16 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import UserPage from './UserPage';
+import Button from '../components/atoms/Button/Button';
 
 const DetailTemplate = ({ pageType, children }) => {
   return (
     <UserPage pageType={pageType}>
       {children}
-      <Link to="/notes">go back</Link>
+      <Link to={`/${pageType}`}>
+        <Button activeColor={pageType}>save / close</Button>
+      </Link>
     </UserPage>
   );
 };
