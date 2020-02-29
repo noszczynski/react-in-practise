@@ -11,6 +11,7 @@ const StyledPageHeader = styled.div`
   display: block;
   min-height: 100px;
   padding-bottom: 60px;
+  padding-top: 30px;
   h1 {
     margin-bottom: 0;
   }

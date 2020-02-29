@@ -1,10 +1,12 @@
-export const routes = {
+const routes = {
   home: '/',
   notes: '/notes',
   note: '/notes/:id',
   twitters: '/twitters',
-  twitter: '/twitter/:id',
+  twitter: '/twitters/:id',
   articles: '/articles',
-  article: '/article/:id',
+  article: '/articles/:id',
   login: '/login',
 };
+
+export default routes;

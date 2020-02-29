@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   min-height: 380px;
   display: grid;
   grid-template-rows: auto 1fr;
+  cursor: pointer;
 `;
 
 const InnerWrapper = styled.div`
@@ -53,6 +54,8 @@ const StyledAvatar = styled.img`
   position: absolute;
   right: 25px;
   top: 25px;
+  display: block;
+  background-color: ${({ theme }) => theme.twitters};
 `;
 
 const StyledLinkButton = styled.a`
@@ -70,6 +73,7 @@ class Card extends Component {
   state = {
     redirect: false,
   };
+
   static propTypes = {
     cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
     title: PropTypes.string.isRequired,
@@ -93,7 +97,7 @@ class Card extends Component {
       return <Redirect to={`${cardType}/${id}`} />;
     }
     return (
-      <Wrapper>
+      <Wrapper onClick={this.handleCardClick}>
         <InnerWrapper activeColor={cardType}>
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{createdDate}</DateInfo>
@@ -102,9 +106,6 @@ class Card extends Component {
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
-          <Button secondary onClick={this.handleCardClick}>
-            Read more
-          </Button>
           <Button secondary>Remove</Button>
         </InnerWrapper>
       </Wrapper>
