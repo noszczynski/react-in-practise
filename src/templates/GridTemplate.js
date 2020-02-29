@@ -96,7 +96,7 @@ class GridTemplate extends Component {
   render() {
     const { pageContext, children } = this.props;
     const { isModalOpen } = this.state;
-
+    console.table(children);
     return (
       <UserPage>
         <div>
@@ -118,7 +118,7 @@ class GridTemplate extends Component {
                   createdDate={date}
                   content={content}
                   link={link}
-                  key={header}
+                  key={id}
                 />
               );
             })}
