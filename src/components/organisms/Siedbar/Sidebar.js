@@ -8,6 +8,7 @@ import twitterIcon from 'assets/icons/twitter.svg';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ButtonIcon from '../../atoms/ButtonIcon/ButtonIcon';
+import withContext from '../../../hoc/withContext';
 
 const Wrapper = styled.div`
   z-index: 100;
@@ -51,14 +52,14 @@ const StyledLogoutButton = styled(ButtonIcon)`
 
 const InnerWrapper = styled.div``;
 
-const Sidebar = ({ pageType }) => {
+const Sidebar = ({ pageContext }) => {
   return (
-    <Wrapper activeColor={pageType}>
+    <Wrapper activeColor={pageContext}>
       <InnerWrapper>
         <StyledLogoLink as={Link} to="/" />
         <StyledLinksList>
           <li>
-            <ButtonIcon as={NavLink} exact to="/notes" icon={penIcon} />
+            <ButtonIcon as={NavLink} to="/notes" icon={penIcon} />
           </li>
           <li>
             <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} />
@@ -76,11 +77,7 @@ const Sidebar = ({ pageType }) => {
 };
 
 Sidebar.propTypes = {
-  pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']).isRequired,
 };
 
-Sidebar.defaultProps = {
-  pageType: 'notes',
-};
-
-export default Sidebar;
+export default withContext(Sidebar);

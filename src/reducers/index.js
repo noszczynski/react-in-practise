@@ -80,7 +80,7 @@ const initialState = {
       date: '1 day',
     },
     {
-      id: 1,
+      id: 2,
       header: 'Stand-up',
       content: `daily stand-up was postponed to tomorrow`,
       date: '1 day',
@@ -90,7 +90,17 @@ const initialState = {
 
 // eslint-disable-next-line
 const rootReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case 'REMOVE_ITEM':
+      return {
+        ...state,
+        [action.payload.itemType]: [
+          ...state[action.payload.itemType].filter(({ id }) => id !== action.payload.id),
+        ],
+      };
+    default:
+      return state;
+  }
 };
 
 export default rootReducer;

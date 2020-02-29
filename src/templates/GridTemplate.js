@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line import/no-named-as-default-member
+import Card from 'components/molecules/Card/Card';
 import styled from 'styled-components';
 import Input from '../components/atoms/Input/Input';
 import Heading from '../components/atoms/Heading/Heading';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
-import Card from '../components/molecules/Card/Card';
 import UserPage from './UserPage';
+import withContext from '../hoc/withContext';
 
 const StyledPageHeader = styled.div`
   display: block;
@@ -36,23 +38,22 @@ const StyledPageContent = styled.div`
   }
 `;
 
-const GridTemplate = ({ children, pageType }) => (
-  <UserPage pageType={pageType}>
+const GridTemplate = ({ children, pageContext }) => (
+  <UserPage>
     <StyledWrapper>
       <StyledPageHeader>
         <Input search placeholder="Search" />
         <StyledPageHeading big as="h1">
-          {pageType}
+          {pageContext}
         </StyledPageHeading>
         <Paragraph>
-          {children.length} {pageType}
+          {children.length} {pageContext}
         </Paragraph>
       </StyledPageHeader>
       <StyledPageContent>
         {children.map(({ header, date, content, link, id }) => {
           return (
             <Card
-              cardType={pageType}
               id={id}
               title={header}
               createdDate={date}
@@ -69,11 +70,7 @@ const GridTemplate = ({ children, pageType }) => (
 
 GridTemplate.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']).isRequired,
 };
 
-GridTemplate.defaultProps = {
-  pageType: 'notes',
-};
-
-export default GridTemplate;
+export default withContext(GridTemplate);
