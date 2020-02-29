@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 
 const InnerWrapper = styled.div`
   padding: 17px 70px 17px 30px;
-  ${({ cardType }) => cardType === 'twitters' && 'padding-right: 120px'};
+  ${({ activeColor }) => activeColor === 'twitters' && 'padding-right: 120px'};
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : '#FFF')};
   position: relative;
 
