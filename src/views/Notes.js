@@ -1,19 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import GridTemplate from 'templates/GridTemplate';
 
-const notes = [
-  {
-    id: '1',
-    header: 'My best note ever!',
-    date: '3 days',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, ipsum, iste itaque minus, molestiae molestias nulla quae quia rerum sequi suscipit velit voluptatum. Culpa eveniet ipsum praesentium sunt vel. Dolores!',
-    link: null,
-  },
-];
+const Notes = ({ notes }) => <GridTemplate pageType="notes">{notes}</GridTemplate>;
 
-const Notes = () => <GridTemplate pageType="notes">{notes}</GridTemplate>;
+const mapStateToProps = ({ notes }) => {
+  return { notes };
+};
 
-Notes.propTypes = {};
-
-export default Notes;
+export default connect(mapStateToProps)(Notes);
