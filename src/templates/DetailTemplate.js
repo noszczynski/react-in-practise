@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import UserPage from './UserPage';
 import Button from '../components/atoms/Button/Button';
+import withContext from '../hoc/withContext';
 
-const DetailTemplate = ({ pageType, children }) => {
+const DetailTemplate = ({ pageContext, children }) => {
   return (
-    <UserPage pageType={pageType}>
+    <UserPage>
       {children}
-      <Link to={`/${pageType}`}>
-        <Button activeColor={pageType}>save / close</Button>
+      <Link to={`/${pageContext}`}>
+        <Button activeColor={pageContext}>save / close</Button>
       </Link>
     </UserPage>
   );
@@ -17,7 +18,7 @@ const DetailTemplate = ({ pageType, children }) => {
 
 DetailTemplate.propTypes = {
   children: PropTypes.node.isRequired,
-  pageType: PropTypes.string.isRequired,
+  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']).isRequired,
 };
 
-export default DetailTemplate;
+export default withContext(DetailTemplate);

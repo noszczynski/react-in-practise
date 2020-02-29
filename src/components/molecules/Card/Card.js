@@ -8,6 +8,7 @@ import LinkIcon from 'assets/icons/link.svg';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeItem as removeItemAction } from '../../../actions';
+import withContext from '../../../hoc/withContext';
 
 const Wrapper = styled.div`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
@@ -77,7 +78,7 @@ class Card extends Component {
   };
 
   static propTypes = {
-    cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+    pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']).isRequired,
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
@@ -94,23 +95,23 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const { cardType, createdDate, content, link, title, id, removeItem } = this.props;
+    const { createdDate, content, link, title, id, removeItem, pageContext } = this.props;
     const { redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to={`${cardType}/${id}`} />;
+      return <Redirect to={`${pageContext}/${id}`} />;
     }
     return (
       <Wrapper onClick={this.handleCardClick}>
-        <InnerWrapper activeColor={cardType}>
+        <InnerWrapper activeColor={pageContext}>
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{createdDate}</DateInfo>
-          {cardType === 'twitters' && <StyledAvatar src={link} />}
-          {cardType === 'articles' && <StyledLinkButton href={link} />}
+          {pageContext === 'twitters' && <StyledAvatar src={link} />}
+          {pageContext === 'articles' && <StyledLinkButton href={link} />}
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
-          <Button secondary onClick={() => removeItem(cardType, id)}>
+          <Button secondary onClick={() => removeItem(pageContext, id)}>
             Remove
           </Button>
         </InnerWrapper>
@@ -123,4 +124,4 @@ const mapDispatchToProps = dispach => ({
   removeItem: (itemType, id) => dispach(removeItemAction(itemType, id)),
 });
 
-export default connect(null, mapDispatchToProps)(Card);
+export default connect(null, mapDispatchToProps)(withContext(Card));
