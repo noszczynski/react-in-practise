@@ -83,7 +83,7 @@ class Card extends Component {
     createdDate: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     link: PropTypes.string,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     removeItem: PropTypes.func.isRequired,
   };
 
@@ -97,7 +97,7 @@ class Card extends Component {
   render() {
     const { createdDate, content, link, title, id, removeItem, pageContext } = this.props;
     const { redirect } = this.state;
-
+    console.log(title, id);
     if (redirect) {
       return <Redirect to={`${pageContext}/${id}`} />;
     }

@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Input from '../../atoms/Input/Input';
 import withContext from '../../../hoc/withContext';
 import Button from '../../atoms/Button/Button';
 import Heading from '../../atoms/Heading/Heading';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { addItem as addItemAction } from '../../../actions';
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -46,7 +48,7 @@ const StyledTextarea = styled(Input)`
   font-size: ${({ theme: { fontSize } }) => fontSize.s};
 `;
 
-const NewItemBar = ({ pageContext, isOpen }) => {
+const NewItemBar = ({ pageContext, isOpen, addItem }) => {
   const singularPageName =
     pageContext === 'twitters'
       ? 'twitter account'
@@ -68,7 +70,18 @@ const NewItemBar = ({ pageContext, isOpen }) => {
       <StyledInput placeholder="title" />
       <StyledTextarea as="textarea" placeholder="content" />
       {pageContext !== 'notes' && <StyledInput placeholder="link" />}
-      <Button activeColor={pageContext}>add {singularPageName}</Button>
+      <Button
+        activeColor={pageContext}
+        onClick={() =>
+          addItem(pageContext, {
+            header: 'TITLE',
+            content: 'CONTENT',
+            link: 'https://google.com/',
+          })
+        }
+      >
+        add {singularPageName}
+      </Button>
     </StyledWrapper>
   );
 };
@@ -76,6 +89,11 @@ const NewItemBar = ({ pageContext, isOpen }) => {
 NewItemBar.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']).isRequired,
   isOpen: PropTypes.bool.isRequired,
+  addItem: PropTypes.func.isRequired,
 };
 
-export default withContext(NewItemBar);
+const mapDispatchToProps = dispatch => ({
+  addItem: (itemType, item) => dispatch(addItemAction(itemType, item)),
+});
+
+export default connect(null, mapDispatchToProps)(withContext(NewItemBar));
