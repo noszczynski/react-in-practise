@@ -1,8 +1,4 @@
-## Available Scripts ###
-
-In the project directory, you can run:
-
-
+live: https://react-course-app.netlify.app/
 
 ### `npm start`
 
